@@ -15,30 +15,42 @@
         android:layout_marginBottom="25dp"
         android:text="@string/main_title"
         android:textSize="24.5sp" />
+
     <TableLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:stretchColumns="*"
-        android:layout_gravity="center">
+        android:layout_gravity="center"
+        android:paddingTop="20px"
+        android:stretchColumns="*">
+
         <TableRow>
+
             <Button
+                android:id="@+id/continue_button"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/continue_label"/>
+                android:text="@string/continue_label" />
+
             <Button
+                android:id="@+id/new_game_button"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/new_game_label"/>
+                android:text="@string/new_game_label" />
         </TableRow>
+
         <TableRow>
+
             <Button
+                android:id="@+id/about_button"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/about_label"/>
+                android:text="@string/about_label" />
+
             <Button
+                android:id="@+id/exit_button"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/exit_label"/>
+                android:text="@string/exit_label" />
         </TableRow>
     </TableLayout>
 

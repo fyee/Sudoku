@@ -8,14 +8,22 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
+
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name=".Sudoku">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".About"
+            android:label="@string/about_title"
+            android:theme="@style/Theme.Dialog" />
+        <activity
+            android:name=".Prefs"
+            android:label="@string/settings_title"></activity>
     </application>
 
 </manifest>
