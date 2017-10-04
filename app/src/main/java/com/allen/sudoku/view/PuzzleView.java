@@ -49,35 +49,31 @@ public class PuzzleView extends View {
 
         Paint background = new Paint();
         background.setColor(getResources().getColor(R.color.puzzle_background, getContext().getTheme()));
+
         canvas.drawRect(0, 0, getWidth(), getHeight(), background);
 
         Paint dark = new Paint();
         dark.setColor(getResources().getColor(R.color.puzzle_dark, getContext().getTheme()));
 
-        Paint hilite = new Paint();
-        hilite.setColor(getResources().getColor(R.color.puzzle_hilite, getContext().getTheme()));
+        Paint white = new Paint();
+        white.setColor(getResources().getColor(R.color.puzzle_hilite, getContext().getTheme()));
         Paint light = new Paint();
         light.setColor(getResources().getColor(R.color.puzzle_light, getContext().getTheme()));
 
         for (int i = 0; i < 9; i++) {
-            canvas.drawLine(0, i * height, getWidth(), i * height, light);
-            canvas.drawLine(0, i * height + 1, getWidth(), i * height + 1, hilite);
-            canvas.drawLine(i * width, 0, i * width, getHeight(), light);
-            canvas.drawLine(i * width + 1, 0, i * width + 1, getHeight(), hilite);
+            canvas.drawLine(0, i * height, getWidth(), i * height, getPaint(dark, light, i));
+            canvas.drawLine(0, i * height + 1, getWidth(), i * height + 1, white);
+            canvas.drawLine(i * width, 0, i * width, getHeight(), getPaint(dark, light, i));
+            canvas.drawLine(i * width + 1, 0, i * width + 1, getHeight(), white);
 
         }
 
-        for (int i = 0; i < 9; i++) {
-            if (i % 3 != 0)
-                continue;
-
-            canvas.drawLine(0, i * height, getWidth(), i * height, dark);
-            canvas.drawLine(0, i * height + 1, getWidth(), i * height + 1, hilite);
-            canvas.drawLine(i * width, 0, i * width, getHeight(), dark);
-            canvas.drawLine(i * width + 1, 0, i * width + 1, getHeight(), hilite);
-
-        }
     }
+
+    private Paint getPaint(Paint dark, Paint light, int i) {
+        return (i % 3 != 0) ? light : dark;
+    }
+
 
     private void getRect(int x, int y, Rect rect) {
         rect.set((int) (x * width), (int) (y * height), (int) (x * width + width), (int) (y * height + height));
