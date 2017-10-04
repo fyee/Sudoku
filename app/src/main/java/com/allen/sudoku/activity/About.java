@@ -1,7 +1,9 @@
-package com.allen.sudoku;
+package com.allen.sudoku.activity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import com.allen.sudoku.R;
 
 public class About extends AppCompatActivity {
 
