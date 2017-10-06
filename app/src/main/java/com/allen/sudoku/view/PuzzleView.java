@@ -6,6 +6,7 @@ import android.graphics.Paint;
 import android.graphics.Rect;
 import android.util.Log;
 import android.view.KeyEvent;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.AnimationUtils;
 
@@ -85,7 +86,7 @@ public class PuzzleView extends View {
         float y = height / 2 - (fm.ascent + fm.descent) / 2;
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
-                canvas.drawText(this.game.getTileString(i,j), i * width + x, j * height + y, foreground);
+                canvas.drawText(this.game.getTileString(i, j), i * width + x, j * height + y, foreground);
             }
         }
 
@@ -105,12 +106,12 @@ public class PuzzleView extends View {
 
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
-                Log.d(TAG, "onDraw: 109 " + i +" "+ j+" " +this.game.getUsedTiles(i, j));
+                Log.d(TAG, "onDraw: 109 " + i + " " + j + " " + this.game.getUsedTiles(i, j));
                 int movesLeft = 9 - game.getUsedTiles(i, j).length;
-                if(movesLeft < c.length){
-                    getRect(i,j, r);
+                if (movesLeft < c.length) {
+                    getRect(i, j, r);
                     hint.setColor(c[movesLeft]);
-                    canvas.drawRect(r,hint);
+                    canvas.drawRect(r, hint);
                 }
             }
 
@@ -118,10 +119,21 @@ public class PuzzleView extends View {
 
         // Draw the selection...
         Log.d(TAG, "selRect=" + selRect);
-        Paint selected = new Paint(); selected.setColor(getResources().getColor(
-                R.color.puzzle_selected,getContext().getTheme()));
+        Paint selected = new Paint();
+        selected.setColor(getResources().getColor(
+                R.color.puzzle_selected, getContext().getTheme()));
         canvas.drawRect(selRect, selected);
 
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        if (event.getAction() != MotionEvent.ACTION_DOWN) {
+            return super.onTouchEvent(event);
+        }
+        select((int) (event.getX() / width), (int) (event.getY() / height));
+        game.showKeypadOrError(selX, selY);
+        return true;
     }
 
     @Override
@@ -188,7 +200,7 @@ public class PuzzleView extends View {
             invalidate(selRect);
         } else {
             Log.d(TAG, "setSelectedTile:  invalid = " + tile);
-            startAnimation(AnimationUtils.loadAnimation(game,R.anim.shake));
+            startAnimation(AnimationUtils.loadAnimation(game, R.anim.shake));
         }
     }
 
